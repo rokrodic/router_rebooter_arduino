@@ -17,9 +17,17 @@
     esptool.py --port COM3 write_flash 0x00000 firmware.bin
     esptool.py --port COM3 erase_flash
 
+   Some info about variables (all times are in milliseconds):
+   TargetHTTP - holds name of internet page you want to connect to.
+   CheckPeriod - defined time between checks of internet page TargetHTTP.
+   ResetPeriod - time to wait after the "no intrnet" = TargetHTTP-could-not-be-connected-to. Will start resetting after this time. Can be longer then CheckPeriod - the wifi might reappear in this time, and the S20 will not reboot as it is not needed anymore.
+   TimeToWaitForRouterReset - time the S20 waits after it resets the router (router needs time to reboot) and tries with new checks of TargetHTTP.
+   nextTime - time when next check of targetHTTP will be done.
+   LastConnect - time of last connection to TargetHTTP.
+
    changelog:
+    - added some more info above
     - SSDP for automatic detection
-    - NOT USED wifi disable (https://nodemcu.readthedocs.io/en/master/en/modules/wifi/#wifisetmode)
     - button reset
     - MDNS + http firmware upload
     - watchdog
